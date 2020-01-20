@@ -1,14 +1,13 @@
 var timer = document.querySelector("#timer")
 var scoreDisplay = document.querySelector("#score-display");
 scoreDisplay.addEventListener("click", displayScores);
-var secondsLeft = 10; //75 sec
+var secondsLeft = 75; 
 var count = localStorage.getItem("count");
 var title = document.querySelector(".title");
 var lower1 = document.querySelector(".lower1");
 var lower2 = document.querySelector(".lower2");
 var lower3 = document.querySelector(".lower3");
 var lower4 = document.querySelector(".lower4");
-var lower5 = document.querySelector(".lower5");
 var button1 = document.createElement("button");
 var button2 = document.createElement("button");
 var button3 = document.createElement("button");
@@ -16,7 +15,6 @@ var button4 = document.createElement("button");
 
 var scores = [];
 var storedScores = JSON.parse(localStorage.getItem("scores"));
-//localStorage.setItem("scores", JSON.stringify(scores));
 
 function init() {
   var storedScores = JSON.parse(localStorage.getItem("scores"));
@@ -42,8 +40,9 @@ button4.style.minHeight = "20px";
 var startButton = document.createElement("button");
 startButton.textContent = "Begin Quiz";
 
-var againButton = document.createElement("button");
-againButton.textContent = "Take the quiz again";
+var a = document.createElement('a');
+a.setAttribute('href', "https://ctunnell.github.io/homework-04/");
+a.innerHTML = "Take the quiz again";
 
 var questions = [
   {
@@ -106,8 +105,6 @@ function setTime() {
 
 function incrementCount() {
   count++;
-  //localStorage.setItem("count", count);
-
 };
 
 function displayQuiz() {
@@ -123,7 +120,7 @@ function displayQuiz() {
   lower4.appendChild(button4);
 
   button1.addEventListener("click", displayQuizTwo);
-  button2.addEventListener("click", displayQuizTwo);// prevent default & send it to local storage
+  button2.addEventListener("click", displayQuizTwo);
   button2.addEventListener("click", function () {
     event.preventDefault();
     incrementCount();
@@ -139,16 +136,16 @@ function displayQuizTwo() {
   lower1.textContent = questions[1].choices[0] + " ";
   lower1.appendChild(button1)
   lower2.textContent = questions[1].choices[1] + " ";
-  lower2.appendChild(button2);//
+  lower2.appendChild(button2); //
   lower3.textContent = questions[1].choices[2] + " ";
   lower3.appendChild(button3);
   lower4.textContent = questions[1].choices[3] + " ";
   lower4.appendChild(button4);
 
   button1.addEventListener("click", displayQuizThree);
-  button2.addEventListener("click", displayQuizThree);// prevent default & send it to local storage
+  button2.addEventListener("click", displayQuizThree);
   button2.addEventListener("click", function () {
-    //event.preventDefault();
+    event.preventDefault();
     incrementCount();
   });
   button3.addEventListener("click", displayQuizThree);
@@ -170,9 +167,9 @@ function displayQuizThree() {
 
   button1.addEventListener("click", displayQuizFour);
   button2.addEventListener("click", displayQuizFour);
-  button3.addEventListener("click", displayQuizFour);//prevent default & send it to local storage
+  button3.addEventListener("click", displayQuizFour);
   button3.addEventListener("click", function () {
-    //event.preventDefault();
+    event.preventDefault();
     incrementCount();
   });
   button4.addEventListener("click", displayQuizFour);
@@ -193,9 +190,9 @@ function displayQuizFour() {
 
   button1.addEventListener("click", displayQuizFive);
   button2.addEventListener("click", displayQuizFive);
-  button3.addEventListener("click", displayQuizFive);//prevent default & send it to local storage
+  button3.addEventListener("click", displayQuizFive);
   button3.addEventListener("click", function () {
-    //event.preventDefault();
+    event.preventDefault();
     incrementCount();
   });
   button4.addEventListener("click", displayQuizFive);
@@ -217,46 +214,48 @@ function displayQuizFive() {
   button1.addEventListener("click", displayResults);
   button2.addEventListener("click", displayResults);
   button3.addEventListener("click", displayResults);
-  button4.addEventListener("click", displayResults);//prevent default & send it to local storage
+  button4.addEventListener("click", displayResults);
   button4.addEventListener("click", function () {
-    //event.preventDefault();
+    event.preventDefault();
     incrementCount();
   });
 
 };
 
 function displayResults() {
+  event.preventDefault();
   title.textContent = "All done!";
   lower1.textContent = " ";
   lower2.textContent = "Your final score is: " + count;
   lower3.textContent = " ";
   lower4.textContent = " ";
   scores.push(count);
-  //storeScores();
+  storeScores();
   console.log(scores);
   console.log(storedScores);
 };
  
 function timeOut() {
-  title.textContent = "All done!";
+  title.textContent = "Time's up";
   lower1.textContent = " ";
-  lower2.textContent = "Your final score is: " + count;
+  lower2.textContent = " ";
+  lower2.appendChild(a);
   lower3.textContent = " ";
-  lower4.appendChild(againButton);
-  console.log(scores);
-  console.log(storedScores);
-
-
-
-}
+  lower4.textContent = " ";
+};
 
 function displayScores() {
 for (i = 0; i < scores.length; i++) {
   title.textContent = "Scores:";
   var li = document.createElement("li");
     li.textContent = scores[i];
+    lower1.textContent = " ";
     lower1.appendChild(li);
 }
+lower2.textContent = " ";
+lower2.appendChild(a);
+lower3.textContent = " ";
+lower4.textContent = " ";
 };
 
-//];
+
