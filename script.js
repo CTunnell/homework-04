@@ -249,7 +249,7 @@ for (i = 0; i < scores.length; i++) {
   title.textContent = "Scores:";
   var li = document.createElement("li");
     li.textContent = scores[i];
-    lower1.textContent = " ";
+   
     lower1.appendChild(li);
 }
 lower2.textContent = " ";
